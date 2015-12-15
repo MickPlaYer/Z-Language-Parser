@@ -1,0 +1,16 @@
+a = 123
+
+text(Hello world!)
+text(This is a link).url(www.zlanguage.com)
+
+ass = 123
+
+text(string).url(link).bold().size(18)
+
+text(line: #i).times(100, i)
+
+def big_img(path)
+	img(path).size(1000, 1000)
+end
+
+big_img(icon.png).url(luthertsai.com)
