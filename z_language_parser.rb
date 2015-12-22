@@ -168,12 +168,12 @@ racc_reduce_table = [
   4, 37, :_reduce_16,
   4, 37, :_reduce_17,
   6, 37, :_reduce_none,
-  3, 37, :_reduce_none,
+  3, 37, :_reduce_19,
   4, 37, :_reduce_none,
   1, 39, :_reduce_none,
   3, 39, :_reduce_none,
   3, 39, :_reduce_none,
-  4, 38, :_reduce_none,
+  4, 38, :_reduce_24,
   6, 38, :_reduce_none,
   4, 41, :_reduce_26,
   4, 41, :_reduce_27,
@@ -375,7 +375,12 @@ module_eval(<<'.,.,', 'z_language_parser.y', 28)
 
 # reduce 18 omitted
 
-# reduce 19 omitted
+module_eval(<<'.,.,', 'z_language_parser.y', 30)
+  def _reduce_19(val, _values, result)
+    @html.newlineWrite
+    result
+  end
+.,.,
 
 # reduce 20 omitted
 
@@ -385,13 +390,18 @@ module_eval(<<'.,.,', 'z_language_parser.y', 28)
 
 # reduce 23 omitted
 
-# reduce 24 omitted
+module_eval(<<'.,.,', 'z_language_parser.y', 37)
+  def _reduce_24(val, _values, result)
+    @temp.time = val[2]
+    result
+  end
+.,.,
 
 # reduce 25 omitted
 
 module_eval(<<'.,.,', 'z_language_parser.y', 40)
   def _reduce_26(val, _values, result)
-     @temp.url = val[2] 
+    @temp.url = val[2]
     result
   end
 .,.,

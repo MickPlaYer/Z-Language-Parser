@@ -1,5 +1,3 @@
-require './lib/img.rb'
-
 class HTMLCreator
 	def initialize(filename)
 		@varstack = Hash.new
@@ -29,5 +27,9 @@ class HTMLCreator
 
 	def write obj
 		@file.puts obj.write
+	end
+
+	def newlineWrite
+		@file.puts '<br>'
 	end
 end

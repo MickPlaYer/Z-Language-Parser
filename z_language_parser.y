@@ -28,17 +28,17 @@ class ZLanguageParser
   first:      'text' L_PARE string R_PARE {@temp = Text.new val[2]}
             | 'img' L_PARE string R_PARE { @temp = Img.new val[2] }
             | 'form' L_PARE string PRI string R_PARE
-            | 'newline' L_PARE R_PARE
+            | 'newline' L_PARE R_PARE {@html.newlineWrite}
             | name L_PARE array R_PARE
 
   attributes: attribute
             | attribute POINT last
             | attribute POINT attributes
 
-  last:       'times' L_PARE number R_PARE
+  last:       'times' L_PARE number R_PARE {@temp.time = val[2]}
             | 'times' L_PARE number PRI name R_PARE
 
-  attribute:  'url' L_PARE string R_PARE { @temp.url = val[2] }
+  attribute:  'url' L_PARE string R_PARE {@temp.url = val[2]}
             | 'size' L_PARE number R_PARE {@temp.h = val[2]}
             | 'bold' L_PARE R_PARE {@temp.b = true}
             | 'italic' L_PARE R_PARE {@temp.i = true}
