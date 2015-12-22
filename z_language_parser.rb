@@ -9,12 +9,15 @@ require 'racc/parser.rb'
 require "./lib/lexer.rb"
 require "./lib/keywords.rb"
 require "./lib/htmlcreator.rb"
+require "./lib/img.rb"
+require "./lib/text.rb"
 
 class ZLanguageParser < Racc::Parser
 
-module_eval(<<'...end z_language_parser.y/module_eval...', 'z_language_parser.y', 71)
+module_eval(<<'...end z_language_parser.y/module_eval...', 'z_language_parser.y', 76)
   def parse str, filename
   	@html = HTMLCreator.new(filename)
+    @temp = nil
     @table = Hash.new
     @lexer = make_lexer str
     do_parse
@@ -162,7 +165,7 @@ racc_reduce_table = [
   1, 31, :_reduce_none,
   3, 31, :_reduce_none,
   3, 31, :_reduce_none,
-  4, 37, :_reduce_none,
+  4, 37, :_reduce_16,
   4, 37, :_reduce_17,
   6, 37, :_reduce_none,
   3, 37, :_reduce_none,
@@ -173,9 +176,9 @@ racc_reduce_table = [
   4, 38, :_reduce_none,
   6, 38, :_reduce_none,
   4, 41, :_reduce_26,
-  4, 41, :_reduce_none,
-  3, 41, :_reduce_none,
-  3, 41, :_reduce_none,
+  4, 41, :_reduce_27,
+  3, 41, :_reduce_28,
+  3, 41, :_reduce_29,
   6, 41, :_reduce_30,
   8, 41, :_reduce_none,
   6, 41, :_reduce_none,
@@ -318,13 +321,12 @@ module_eval(<<'.,.,', 'z_language_parser.y', 11)
 
 module_eval(<<'.,.,', 'z_language_parser.y', 12)
   def _reduce_6(val, _values, result)
-     puts ">>>>>>>>>>>>>>>>html ==> #{val[0]}"
-            	@html.write 
+     @html.write @temp 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 15)
+module_eval(<<'.,.,', 'z_language_parser.y', 14)
   def _reduce_7(val, _values, result)
      @html.putVar(val[0], val[2]) 
     result
@@ -333,14 +335,14 @@ module_eval(<<'.,.,', 'z_language_parser.y', 15)
 
 # reduce 8 omitted
 
-module_eval(<<'.,.,', 'z_language_parser.y', 18)
+module_eval(<<'.,.,', 'z_language_parser.y', 17)
   def _reduce_9(val, _values, result)
     result = val[1]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 19)
+module_eval(<<'.,.,', 'z_language_parser.y', 18)
   def _reduce_10(val, _values, result)
     result = val[0]
     result
@@ -357,11 +359,16 @@ module_eval(<<'.,.,', 'z_language_parser.y', 19)
 
 # reduce 15 omitted
 
-# reduce 16 omitted
+module_eval(<<'.,.,', 'z_language_parser.y', 27)
+  def _reduce_16(val, _values, result)
+    @temp = Text.new val[2]
+    result
+  end
+.,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 29)
+module_eval(<<'.,.,', 'z_language_parser.y', 28)
   def _reduce_17(val, _values, result)
-     @html.img val[2] 
+     @temp = Img.new val[2] 
     result
   end
 .,.,
@@ -382,22 +389,39 @@ module_eval(<<'.,.,', 'z_language_parser.y', 29)
 
 # reduce 25 omitted
 
-module_eval(<<'.,.,', 'z_language_parser.y', 41)
+module_eval(<<'.,.,', 'z_language_parser.y', 40)
   def _reduce_26(val, _values, result)
-     @html.a val[2] 
+     @temp.url = val[2] 
     result
   end
 .,.,
 
-# reduce 27 omitted
+module_eval(<<'.,.,', 'z_language_parser.y', 41)
+  def _reduce_27(val, _values, result)
+    @temp.h = val[2]
+    result
+  end
+.,.,
 
-# reduce 28 omitted
+module_eval(<<'.,.,', 'z_language_parser.y', 42)
+  def _reduce_28(val, _values, result)
+    @temp.b = true
+    result
+  end
+.,.,
 
-# reduce 29 omitted
+module_eval(<<'.,.,', 'z_language_parser.y', 43)
+  def _reduce_29(val, _values, result)
+    @temp.i = true
+    result
+  end
+.,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 45)
+module_eval(<<'.,.,', 'z_language_parser.y', 46)
   def _reduce_30(val, _values, result)
-     @html.size val[2], val[4] 
+                   	@temp.w = val[2]
+               	@temp.h = val[4] 
+               
     result
   end
 .,.,
@@ -410,49 +434,49 @@ module_eval(<<'.,.,', 'z_language_parser.y', 45)
 
 # reduce 34 omitted
 
-module_eval(<<'.,.,', 'z_language_parser.y', 51)
+module_eval(<<'.,.,', 'z_language_parser.y', 54)
   def _reduce_35(val, _values, result)
      result = [val[0]] + val[2] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 52)
+module_eval(<<'.,.,', 'z_language_parser.y', 55)
   def _reduce_36(val, _values, result)
      result = [val[0]] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 54)
+module_eval(<<'.,.,', 'z_language_parser.y', 57)
   def _reduce_37(val, _values, result)
      result = val[0] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 56)
+module_eval(<<'.,.,', 'z_language_parser.y', 59)
   def _reduce_38(val, _values, result)
      result = val[0] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 57)
+module_eval(<<'.,.,', 'z_language_parser.y', 60)
   def _reduce_39(val, _values, result)
      result = val[0] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 59)
+module_eval(<<'.,.,', 'z_language_parser.y', 62)
   def _reduce_40(val, _values, result)
      result = val[0].to_i 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 60)
+module_eval(<<'.,.,', 'z_language_parser.y', 63)
   def _reduce_41(val, _values, result)
      result = -(val[1].to_i) 
     result

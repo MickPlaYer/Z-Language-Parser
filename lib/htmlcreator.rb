@@ -3,8 +3,6 @@ require './lib/img.rb'
 class HTMLCreator
 	def initialize(filename)
 		@varstack = Hash.new
-		@type = 0
-		@temp = nil
 		@file = File.open(filename + '.html', 'w')
 		@file.puts '<!DOCTYPE html>'
 		@file.puts '<html>'
@@ -29,27 +27,7 @@ class HTMLCreator
 
 	end
 
-	def write
-		@file.puts @temp.write if @temp
-		@temp = nil
-		@type = 0
-	end
-
-	def a url
-		if @type == 1
-			@temp.url = url
-		end
-	end
-
-	def img url
-		@temp = Img.new url
-		@type = 1
-	end
-
-	def size w, h
-		if @type == 1
-			@temp.w = w
-			@temp.h = h
-		end
+	def write obj
+		@file.puts obj.write
 	end
 end

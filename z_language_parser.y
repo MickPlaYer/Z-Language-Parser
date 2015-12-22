@@ -10,7 +10,7 @@ class ZLanguageParser
             | method methods
 
   method:     define { puts '>>>>>>>define' }
-            | html { @html.write }
+            | html { @html.write @temp }
 
   define:     name '=' variable { @html.putVar(val[0], val[2]) }
             | 'def' name L_PARE array R_PARE htmls 'end'
@@ -25,8 +25,8 @@ class ZLanguageParser
             | first POINT last
             | first POINT attributes
 
-  first:      'text' L_PARE string R_PARE
-            | 'img' L_PARE string R_PARE { @html.img val[2] }
+  first:      'text' L_PARE string R_PARE {@temp = Text.new val[2]}
+            | 'img' L_PARE string R_PARE { @temp = Img.new val[2] }
             | 'form' L_PARE string PRI string R_PARE
             | 'newline' L_PARE R_PARE
             | name L_PARE array R_PARE
@@ -38,11 +38,15 @@ class ZLanguageParser
   last:       'times' L_PARE number R_PARE
             | 'times' L_PARE number PRI name R_PARE
 
-  attribute:  'url' L_PARE string R_PARE { @html.a val[2] }
-            | 'size' L_PARE number R_PARE
-            | 'bold' L_PARE R_PARE
-            | 'italic' L_PARE R_PARE
-            | 'size' L_PARE number PRI number R_PARE { @html.size val[2], val[4] }
+  attribute:  'url' L_PARE string R_PARE { @temp.url = val[2] }
+            | 'size' L_PARE number R_PARE {@temp.h = val[2]}
+            | 'bold' L_PARE R_PARE {@temp.b = true}
+            | 'italic' L_PARE R_PARE {@temp.i = true}
+            | 'size' L_PARE number PRI number R_PARE 
+               { 
+               	@temp.w = val[2]
+               	@temp.h = val[4] 
+               }
             | 'input' L_PARE string PRI string PRI string R_PARE
             | 'select' L_PARE string PRI array R_PARE
             | 'submit' L_PARE string R_PARE
@@ -65,10 +69,13 @@ end
 require "./lib/lexer.rb"
 require "./lib/keywords.rb"
 require "./lib/htmlcreator.rb"
+require "./lib/img.rb"
+require "./lib/text.rb"
 
 ---- inner
   def parse str, filename
   	@html = HTMLCreator.new(filename)
+    @temp = nil
     @table = Hash.new
     @lexer = make_lexer str
     do_parse
