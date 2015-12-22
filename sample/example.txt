@@ -3,7 +3,7 @@ a = 123
 text(Hello world!)
 text(This is a link).url(www.zlanguage.com)
 
-ass = 123
+textass = 123
 
 text(string).url(link).bold().size(18)
 

@@ -4,6 +4,7 @@ class Lexer
 
   def initialize 
     @rules = []
+    @keyword = []
   end
 
   def add_ignore pattern
@@ -15,7 +16,11 @@ class Lexer
   end
 
   def add_keyword aString
-    @rules << [Regexp.new(aString), aString]
+    @keyword << [Regexp.new("(" + aString + ")[\(]"), aString]
+  end
+  
+  def add_keyword_space aString
+    @keyword << [Regexp.new("(" + aString + ")[\s\n]", Regexp::MULTILINE), aString]
   end
 
   def start aString
@@ -29,6 +34,15 @@ class Lexer
   end
 
   def get_token
+	@keyword.each do |key, value|
+      m = @base.scan(key)
+      if m
+		@base.pos = @base.pos - 1
+		m = m[0 .. -2]
+		return [value, m]
+      end
+	end
+	
     @rules.each do |key, value|
       m = @base.scan(key)
       return [value, m] if m

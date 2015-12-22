@@ -85,6 +85,10 @@ require "./lib/keywords.rb"
     keywords.each do |kw|
       lexer.add_keyword kw
     end
+    
+    keywords_space.each do |kw|
+      lexer.add_keyword_space kw
+    end
 
     lexer.add_token(/-/, :NEGATIVE)
     lexer.add_token(/\(/, :L_PARE)
@@ -112,7 +116,7 @@ if $0 == __FILE__
   puts 'Result:'
   # Do parse.
   # begin
-    parser.parse(contents)
+    parser.parse(contents.to_s)
   # rescue
   #   puts $!
   # end
