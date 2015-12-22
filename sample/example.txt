@@ -1,7 +1,9 @@
-a = 123
+a = [abc, sd, bc, jd, jir, 1234]
+
+img(a.png).url(http://luthertsai.com).size(100, 200)
 
 text(Hello world!)
-text(This is a link).url(www.zlanguage.com)
+text(This is a link).url(http://www.zlanguage.com)
 
 textass = 123
 
@@ -10,7 +12,7 @@ text(string).url(link).bold().size(18)
 text(line: #i).times(100, i)
 
 def big_img(path)
-	img(path).size(1000, 1000)
+	img(#{path}).size(1000, 1000)
 end
 
-big_img(icon.png).url(luthertsai.com)
+big_img(icon.png).url(http://luthertsai2.com)

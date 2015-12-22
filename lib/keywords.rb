@@ -9,7 +9,7 @@
  
  def keywords_space
 	[
-      ',', '=',
+      '=',
       'def', 'end'
     ]
  end

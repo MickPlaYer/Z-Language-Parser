@@ -2,20 +2,21 @@
 class ZLanguageParser
   rule
 
-  start:      methods
-            | /* none */
+  start:      methods {@html.finalize}
+            | /* none */ {@html.finalize}
+
 
   methods:    method
             | method methods
 
   method:     define { puts '>>>>>>>define' }
-            | html { puts '>>>>>>>html' }
+            | html { @html.write }
 
-  define:     name '=' variable /*{ @table[val[0]] = val[2] }*/
+  define:     name '=' variable { @html.putVar(val[0], val[2]) }
             | 'def' name L_PARE array R_PARE htmls 'end'
 
-  variable:   '[' array ']'
-            | number
+  variable:   L_ARR array R_ARR {result = val[1]}
+            | number {result = val[0]}
 
   htmls:      html
             | html htmls
@@ -25,8 +26,8 @@ class ZLanguageParser
             | first POINT attributes
 
   first:      'text' L_PARE string R_PARE
-            | 'img' L_PARE string R_PARE
-            | 'form' L_PARE string ',' string R_PARE
+            | 'img' L_PARE string R_PARE { @html.img val[2] }
+            | 'form' L_PARE string PRI string R_PARE
             | 'newline' L_PARE R_PARE
             | name L_PARE array R_PARE
 
@@ -35,24 +36,25 @@ class ZLanguageParser
             | attribute POINT attributes
 
   last:       'times' L_PARE number R_PARE
-            | 'times' L_PARE number ',' name R_PARE
+            | 'times' L_PARE number PRI name R_PARE
 
-  attribute:  'url' L_PARE string R_PARE
+  attribute:  'url' L_PARE string R_PARE { @html.a val[2] }
             | 'size' L_PARE number R_PARE
             | 'bold' L_PARE R_PARE
             | 'italic' L_PARE R_PARE
-            | 'size' L_PARE number ',' number R_PARE
-            | 'input' L_PARE string ',' string ',' string R_PARE
-            | 'select' L_PARE string ',' array R_PARE
+            | 'size' L_PARE number PRI number R_PARE { @html.size val[2], val[4] }
+            | 'input' L_PARE string PRI string PRI string R_PARE
+            | 'select' L_PARE string PRI array R_PARE
             | 'submit' L_PARE string R_PARE
 
   array:      /* none */
-            | name
-            | array ',' name
+            | name PRI array { result = [val[0]] + val[2] }
+            | name { result = [val[0]] }
 
-  string:     STRING
+  string:     STRING { result = val[0] }
 
-  name:       STRING
+  name:       STRING { result = val[0] }
+  			| number { result = val[0] }
 
   number:     NUMBER { result = val[0].to_i }
             | NEGATIVE NUMBER { result = -(val[1].to_i) }
@@ -62,9 +64,11 @@ end
 ---- header
 require "./lib/lexer.rb"
 require "./lib/keywords.rb"
+require "./lib/htmlcreator.rb"
 
 ---- inner
-  def parse str
+  def parse str, filename
+  	@html = HTMLCreator.new(filename)
     @table = Hash.new
     @lexer = make_lexer str
     do_parse
@@ -93,9 +97,12 @@ require "./lib/keywords.rb"
     lexer.add_token(/-/, :NEGATIVE)
     lexer.add_token(/\(/, :L_PARE)
     lexer.add_token(/\)/, :R_PARE)
+    lexer.add_token(/\[/, :L_ARR)
+    lexer.add_token(/\]/, :R_ARR)
     lexer.add_token(/\./, :POINT)
     lexer.add_token(/\d+/, :NUMBER)
-    lexer.add_token(/[^\(^\)^\n^=]+/, :STRING)
+    lexer.add_token(/\,/, :PRI)
+    lexer.add_token(/[^\(^\)^\n^=^\,^\]]+/, :STRING)
 
     lexer.start str
     return lexer
@@ -116,7 +123,7 @@ if $0 == __FILE__
   puts 'Result:'
   # Do parse.
   # begin
-    parser.parse(contents.to_s)
+    parser.parse(contents.to_s, File.basename(file_path, ".*"))
   # rescue
   #   puts $!
   # end
