@@ -18,13 +18,13 @@ class HTMLCreator
 	end
 
 	def putVar key, value
-		@varstack[key] = value
-		puts @varstack.to_s
+		@varstack[key.to_s.gsub(/\s+/, "")] = value
+		#puts @varstack.to_s
 	end
 
 	def putFuncVar key, value
 		@funcstack[key] = value
-		puts @funcstack.to_s
+		#puts @funcstack.to_s
 	end
 
 	def callFunc key, values
@@ -32,6 +32,6 @@ class HTMLCreator
 	end
 
 	def write obj
-		@file.puts obj.write
+		@file.puts (obj.write @varstack)
 	end
 end

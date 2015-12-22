@@ -6,7 +6,7 @@ class Select
 		@objs = objs
 	end
 
-	def write
+	def write var
 		temp = "<select name='#{@name}'>"
 		if @objs.kind_of?(Array)
 			@objs.each do |obj|
@@ -16,5 +16,9 @@ class Select
 			temp = temp + "\n" + "<option value='#{@objs}'>#{@objs}</option>"
 		end
 		temp = temp + "\n" + "</select>"
+		var.each do |k, v|
+			temp.gsub! "\#\{#{k}\}", v.to_s
+		end
+		temp
 	end
 end

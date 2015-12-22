@@ -11,7 +11,7 @@ class Function
 		temp = ""
 		rep = @attrs.zip values
 		@objs.each do |obj|
-			temp2 = obj.write
+			temp2 = obj.write []
 			rep.each do |aattr, val|
 				temp2.gsub! "\#\{#{aattr.to_s}\}", val.to_s
 			end

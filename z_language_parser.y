@@ -56,7 +56,11 @@ class ZLanguageParser
             | attribute POINT attributes
 
   last:       'times' L_PARE number R_PARE {@temp.time = val[2]}
-            | 'times' L_PARE number PRI name R_PARE
+            | 'times' L_PARE number PRI name R_PARE 
+            {
+            		@temp.time = val[2]
+            		@temp.time_attr = val[4]
+            	}
 
   attribute:  'url' L_PARE string R_PARE {@temp.url = val[2]}
             | 'size' L_PARE number R_PARE {@temp.h = val[2]}
@@ -96,7 +100,7 @@ require "./lib/input.rb"
 require "./lib/select.rb"
 require "./lib/newline.rb"
 require "./lib/function.rb"
-require "./lib/object.rb"
+require "./lib/obj.rb"
 
 ---- inner
   def parse str, filename
@@ -109,7 +113,7 @@ require "./lib/object.rb"
 
   def next_token
     last = @lexer.next_token
-    puts last[0].to_s + ":\t" + last[1].to_s 
+    #puts last[0].to_s + ":\t" + last[1].to_s 
     last
   end
 
@@ -151,9 +155,9 @@ if $0 == __FILE__
   contents = file.read
   file.close
   # Show what to parse.
-  puts "Parsing:\n" + contents.to_s
-  puts
-  puts 'Result:'
+  #puts "Parsing:\n" + contents.to_s
+  #puts
+  #puts 'Result:'
   # Do parse.
   # begin
     parser.parse(contents.to_s, File.basename(file_path, ".*"))

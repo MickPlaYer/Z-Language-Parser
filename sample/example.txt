@@ -7,12 +7,14 @@ text(This is a link).url(http://www.zlanguage.com)
 
 textass = 123
 
-text(string).url(link).bold().size(18)
+text(#{textass}).url(link).bold().size(18)
 
 text(line: #{i}).times(100, i)
+img(#{i}.png).times(5,i)
+newline().times(6)
 
 def big_img(path)
-	img(#{path}).size(1000, 1000)
+	img(#{path}#{i}).size(1000, 1000).times(5,i)
 end
 
 big_img(icon.png)
