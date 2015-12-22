@@ -9,10 +9,10 @@ textass = 123
 
 text(string).url(link).bold().size(18)
 
-text(line: #i).times(100, i)
+text(line: #{i}).times(100, i)
 
 def big_img(path)
 	img(#{path}).size(1000, 1000)
 end
 
-big_img(icon.png).url(http://luthertsai2.com)
+big_img(icon.png)

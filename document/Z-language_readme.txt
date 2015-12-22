@@ -29,7 +29,7 @@ form(action, method) -> generate a HTML Form
 	.select(String _name, Array _optionArray)
 		-> <select name="_name"><option value="_optionArray[i]"></select>
 	.submit(String _value)
-		-> <input type="submit" value="_value">
+		-> <input name="submit" type="submit" value="_value">
 
 .times(int _count) -> do the loop _count times
 	It is the funciton tat can be called by any object, but it only can be called in the last.

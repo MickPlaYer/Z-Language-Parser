@@ -1,0 +1,1 @@
+form(luther.com, GET).input(test, text, test).input(test, text, test).select(opt, 2).submit(Go).times(3)

@@ -15,7 +15,11 @@ class Text
 		temp2 = ""
 		@time = @time.to_i
 		@time.times do
-			temp2 = "<font size='#{@h}'>#{@text}</font>" if @h
+			 if @h
+				temp2 = "<font size='#{@h}'>#{@text}</font>"
+			else
+				temp2 = "#{@text}"
+			end
 			temp2 = "<b>#{temp2}</b>" if @b
 			temp2 = "<i>#{temp2}</i>" if @i
 			temp2 = "<a href='#{@url}'>#{temp2}</a>" if @url != ""

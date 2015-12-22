@@ -1,6 +1,7 @@
 class HTMLCreator
 	def initialize(filename)
 		@varstack = Hash.new
+		@funcstack = Hash.new
 		@file = File.open(filename + '.html', 'w')
 		@file.puts '<!DOCTYPE html>'
 		@file.puts '<html>'
@@ -21,15 +22,16 @@ class HTMLCreator
 		puts @varstack.to_s
 	end
 
-	def putFuncVar key, attri, value
+	def putFuncVar key, value
+		@funcstack[key] = value
+		puts @funcstack.to_s
+	end
 
+	def callFunc key, values
+		@funcstack[key].makeObj values
 	end
 
 	def write obj
 		@file.puts obj.write
-	end
-
-	def newlineWrite
-		@file.puts '<br>'
 	end
 end
