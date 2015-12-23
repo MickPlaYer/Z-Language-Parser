@@ -10,7 +10,11 @@ class ZLanguageParser
             | method methods
 
   method:     define
-            | html { @html.write @temp }
+            | html
+            { 
+              @html.write val[0]
+              @temp = nil
+            }
 
   define:     name '=' variable { @html.putVar(val[0], val[2]) }
             | 'def' name L_PARE array R_PARE htmls 'end' {@html.putFuncVar(val[1], (Function.new val[1], val[3], @table))}
@@ -26,29 +30,29 @@ class ZLanguageParser
             | first POINT attributes {result = val[0]}
 
   first:      'text' L_PARE string R_PARE
-  	{
-  		@temp = Text.new val[2]
-  		result = @temp
-  	}
+            {
+              @temp = Text.new val[2]
+              result = @temp
+            }
             | 'img' L_PARE string R_PARE 
             {
-            		@temp = Img.new val[2]
-  		result = @temp
+                @temp = Img.new val[2]
+                result = @temp
             }
             | 'form' L_PARE string PRI string R_PARE
             {
-            		@temp = Form.new val[2], val[4]
-  		result = @temp
-            	}
+                @temp = Form.new val[2], val[4]
+                result = @temp
+            }
             | 'newline' L_PARE R_PARE
             {
-            		@temp = NewLine.new
-            		result = @temp
-            	}
+                @temp = NewLine.new
+                result = @temp
+            }
             | name L_PARE array R_PARE
             {
-            		@temp = @html.callFunc val[0], val[2]
-            		result = @temp
+                @temp = @html.callFunc val[0], val[2]
+                result = @temp
             }
 
   attributes: attribute
@@ -58,21 +62,21 @@ class ZLanguageParser
   last:       'times' L_PARE number R_PARE {@temp.time = val[2]}
             | 'times' L_PARE number PRI name R_PARE 
             {
-            		@temp.time = val[2]
-            		@temp.time_attr = val[4]
-            	}
+                @temp.time = val[2]
+                @temp.time_attr = val[4]
+            }
 
   attribute:  'url' L_PARE string R_PARE {@temp.url = val[2]}
             | 'size' L_PARE number R_PARE {@temp.h = val[2]}
             | 'bold' L_PARE R_PARE {@temp.b = true}
             | 'italic' L_PARE R_PARE {@temp.i = true}
             | 'size' L_PARE number PRI number R_PARE 
-               { 
-               	@temp.w = val[2]
-               	@temp.h = val[4] 
-               }
+            { 
+                @temp.w = val[2]
+                @temp.h = val[4] 
+            }
             | 'input' L_PARE string PRI string PRI string R_PARE {@temp.addInput val[2], val[4], val[6]}
-            | 'select' L_PARE string PRI variable R_PARE {@temp.addSelect val[2], val[4]}
+            | 'select' L_PARE string PRI array R_PARE {@temp.addSelect val[2], val[4]}
             | 'submit' L_PARE string R_PARE {@temp.addSubmit val[2]}
 
   array:      /* none */
@@ -82,7 +86,7 @@ class ZLanguageParser
   string:     STRING { result = val[0] }
 
   name:       STRING { result = val[0] }
-  			| number { result = val[0] }
+        | number { result = val[0] }
 
   number:     NUMBER { result = val[0].to_i }
             | NEGATIVE NUMBER { result = -(val[1].to_i) }
@@ -104,7 +108,7 @@ require "./lib/obj.rb"
 
 ---- inner
   def parse str, filename
-  	@html = HTMLCreator.new(filename)
+    @html = HTMLCreator.new(filename)
     @temp = nil
     @table = []
     @lexer = make_lexer str
@@ -159,9 +163,10 @@ if $0 == __FILE__
   #puts
   #puts 'Result:'
   # Do parse.
-  # begin
+  begin
     parser.parse(contents.to_s, File.basename(file_path, ".*"))
-  # rescue
-  #   puts $!
-  # end
+    puts 'Interprete success!'
+  rescue
+     puts $!
+  end
 end

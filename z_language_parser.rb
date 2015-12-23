@@ -20,9 +20,9 @@ require "./lib/obj.rb"
 
 class ZLanguageParser < Racc::Parser
 
-module_eval(<<'...end z_language_parser.y/module_eval...', 'z_language_parser.y', 106)
+module_eval(<<'...end z_language_parser.y/module_eval...', 'z_language_parser.y', 110)
   def parse str, filename
-  	@html = HTMLCreator.new(filename)
+    @html = HTMLCreator.new(filename)
     @temp = nil
     @table = []
     @lexer = make_lexer str
@@ -67,15 +67,15 @@ module_eval(<<'...end z_language_parser.y/module_eval...', 'z_language_parser.y'
 ##### State transition tables begin ###
 
 racc_action_table = [
-     7,    30,    84,    15,    16,     7,    30,     9,    10,    11,
-    85,    12,     9,    10,    11,    19,    12,    20,    15,    16,
-    13,    15,    16,    15,    16,    13,    15,    16,     9,    10,
-    11,    87,    12,     9,    10,    11,    17,    12,    22,    88,
-    23,    13,    15,    16,    15,    16,    13,    15,    16,    38,
+     7,    30,    84,    17,    19,     7,    20,     9,    10,    11,
+    85,    12,     9,    10,    11,    87,    12,    22,    15,    16,
+    13,    15,    16,    88,    23,    13,    15,    16,     9,    10,
+    11,    24,    12,     9,    10,    11,    25,    12,    13,    15,
+    16,    13,    15,    16,    15,    16,    13,    15,    16,    38,
     39,    40,    41,    42,    43,    44,    45,    38,    39,    40,
     41,    42,    43,    44,    45,    13,    15,    16,    13,    15,
     16,    13,    15,    16,    13,    15,    16,    13,    15,    16,
-    13,    15,    16,    15,    16,    24,    25,    26,    27,    28,
+    13,    15,    16,    15,    16,    15,    16,    26,    27,    28,
     34,    47,    47,    47,    50,    52,    53,    55,    56,    57,
     58,    59,    60,    61,    62,    63,    64,    65,    66,    67,
     69,    47,    75,    76,    47,    47,    47,    47,    86,    89,
@@ -83,15 +83,15 @@ racc_action_table = [
     47,   104 ]
 
 racc_action_check = [
-     0,    19,    72,    56,    56,     3,    90,     0,     0,     0,
-    72,     0,     3,     3,     3,     6,     3,     6,    19,    19,
-     0,     0,     0,    90,    90,     3,     3,     3,    69,    69,
-    69,    74,    69,    82,    82,    82,     1,    82,     8,    74,
-     9,    69,    69,    69,    58,    58,    82,    82,    82,    22,
+     0,    19,    72,     1,     6,     3,     6,     0,     0,     0,
+    72,     0,     3,     3,     3,    74,     3,     8,    19,    19,
+     0,     0,     0,    74,     9,     3,     3,     3,    69,    69,
+    69,    10,    69,    82,    82,    82,    11,    82,     7,     7,
+     7,    69,    69,    69,    56,    56,    82,    82,    82,    22,
     22,    22,    22,    22,    22,    22,    22,    55,    55,    55,
-    55,    55,    55,    55,    55,     7,     7,     7,    20,    20,
-    20,    30,    30,    30,    34,    34,    34,    53,    53,    53,
-    85,    85,    85,    88,    88,    10,    11,    12,    16,    17,
+    55,    55,    55,    55,    55,    20,    20,    20,    30,    30,
+    30,    34,    34,    34,    53,    53,    53,    85,    85,    85,
+    90,    90,    90,    58,    58,    88,    88,    12,    16,    17,
     21,    23,    24,    25,    26,    32,    33,    37,    38,    39,
     40,    41,    42,    43,    44,    45,    46,    48,    49,    51,
     54,    57,    59,    60,    61,    62,    63,    66,    73,    77,
@@ -99,16 +99,16 @@ racc_action_check = [
    101,   103 ]
 
 racc_action_pointer = [
-    -3,    36,   nil,     2,   nil,   nil,    13,    42,    29,    36,
-    81,    82,    83,   nil,   nil,   nil,    64,    89,   nil,    -6,
-    45,    86,    34,    68,    69,    70,    89,   nil,   nil,   nil,
-    48,   nil,    90,    83,    51,   nil,   nil,    88,    94,    95,
+    -3,     3,   nil,     2,   nil,   nil,     2,    15,     8,    20,
+    27,    32,    83,   nil,   nil,   nil,    64,    89,   nil,    -6,
+    42,    86,    34,    68,    69,    70,    89,   nil,   nil,   nil,
+    45,   nil,    90,    83,    48,   nil,   nil,    88,    94,    95,
     96,    97,    98,    99,   100,   101,   101,   nil,   102,    95,
-   nil,   101,   nil,    54,   105,    42,   -21,    88,    20,   107,
+   nil,   101,   nil,    51,   105,    42,    20,    88,    59,   107,
    108,    91,    92,    93,   nil,   nil,    94,   nil,   nil,    18,
-   nil,   nil,    -3,   113,    26,   nil,   nil,   106,   107,   116,
-   117,   117,    23,   120,   nil,    57,   nil,   nil,    59,   102,
-    -1,   nil,   nil,   nil,   nil,   121,   122,   115,   124,   nil,
+   nil,   nil,    -3,   113,    10,   nil,   nil,   106,   107,   116,
+   117,   117,    23,   120,   nil,    54,   nil,   nil,    61,   102,
+    57,   nil,   nil,   nil,   nil,   121,   122,   115,   124,   nil,
    nil,   107,   nil,   126,   nil ]
 
 racc_action_default = [
@@ -121,34 +121,34 @@ racc_action_default = [
    -42,   -42,   -42,   -42,   -16,   -17,   -42,    -9,   -35,   -42,
    -22,   -23,   -42,   -42,   -42,   -28,   -29,   -42,   -42,   -42,
    -42,   -42,   -11,   -42,   -24,   -42,   -26,   -27,   -42,   -42,
-   -42,   -33,   -18,    -8,   -12,   -42,   -42,   -42,   -42,   -25,
+   -34,   -33,   -18,    -8,   -12,   -42,   -42,   -42,   -42,   -25,
    -30,   -42,   -32,   -42,   -31 ]
 
 racc_goto_table = [
-     6,    29,    31,     6,    32,    35,    82,    21,    46,    48,
-    49,    36,    81,     2,    51,     1,    18,   nil,    54,    82,
+     6,    32,    35,     6,    31,    36,    82,    21,    46,    48,
+    49,    51,    81,     2,     1,    54,    18,    29,   nil,    82,
    nil,   nil,   nil,   nil,   nil,    94,   nil,   nil,   nil,   nil,
-   nil,   nil,   nil,   nil,   nil,   nil,   nil,    68,    70,    72,
-   nil,    74,    73,   nil,    71,   nil,    77,    78,    79,   nil,
+   nil,   nil,   nil,   nil,    68,    70,   nil,   nil,    71,   nil,
+   nil,    72,    73,    74,   nil,   nil,    77,    78,    79,   nil,
    nil,    80,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,
    nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,    83,
-   nil,    96,    98,    31,    97,   nil,   nil,   nil,   nil,   nil,
+   nil,    98,   nil,    96,    97,   nil,   nil,   nil,   nil,   nil,
    nil,   nil,    83,   nil,   nil,    95,   103 ]
 
 racc_goto_check = [
-     6,     7,    10,     6,     8,    12,     5,     6,    14,    14,
-    14,    13,     9,     2,     8,     1,     2,   nil,     8,     5,
+     6,     8,    12,     6,    10,    13,     5,     6,    14,    14,
+    14,     8,     9,     2,     1,     8,     2,     7,   nil,     5,
    nil,   nil,   nil,   nil,   nil,     9,   nil,   nil,   nil,   nil,
-   nil,   nil,   nil,   nil,   nil,   nil,   nil,     8,    12,    10,
-   nil,    10,    14,   nil,    13,   nil,    14,    14,    14,   nil,
+   nil,   nil,   nil,   nil,     8,    12,   nil,   nil,    13,   nil,
+   nil,    10,    14,    10,   nil,   nil,    14,    14,    14,   nil,
    nil,    14,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,
    nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,     6,
-   nil,    10,     7,    10,    14,   nil,   nil,   nil,   nil,   nil,
+   nil,     8,   nil,    10,    14,   nil,   nil,   nil,   nil,   nil,
    nil,   nil,     6,   nil,   nil,     6,    14 ]
 
 racc_goto_pointer = [
-   nil,    15,    13,   nil,   nil,   -63,     0,   -18,   -16,   -57,
-   -17,   nil,   -17,   -11,   -15,   nil ]
+   nil,    14,    13,   nil,   nil,   -63,     0,    -2,   -19,   -57,
+   -15,   nil,   -20,   -17,   -15,   nil ]
 
 racc_goto_default = [
    nil,   nil,   nil,     3,     4,     5,    33,   nil,   nil,   nil,
@@ -320,116 +320,118 @@ module_eval(<<'.,.,', 'z_language_parser.y', 5)
 
 # reduce 5 omitted
 
-module_eval(<<'.,.,', 'z_language_parser.y', 12)
+module_eval(<<'.,.,', 'z_language_parser.y', 14)
   def _reduce_6(val, _values, result)
-     @html.write @temp 
+                  @html.write val[0]
+              @temp = nil
+            
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 14)
+module_eval(<<'.,.,', 'z_language_parser.y', 18)
   def _reduce_7(val, _values, result)
      @html.putVar(val[0], val[2]) 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 15)
+module_eval(<<'.,.,', 'z_language_parser.y', 19)
   def _reduce_8(val, _values, result)
     @html.putFuncVar(val[1], (Function.new val[1], val[3], @table))
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 17)
+module_eval(<<'.,.,', 'z_language_parser.y', 21)
   def _reduce_9(val, _values, result)
     result = val[1]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 18)
+module_eval(<<'.,.,', 'z_language_parser.y', 22)
   def _reduce_10(val, _values, result)
     result = val[0]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 20)
+module_eval(<<'.,.,', 'z_language_parser.y', 24)
   def _reduce_11(val, _values, result)
      @table << val[0]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 21)
+module_eval(<<'.,.,', 'z_language_parser.y', 25)
   def _reduce_12(val, _values, result)
     @table << val[0]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 23)
+module_eval(<<'.,.,', 'z_language_parser.y', 27)
   def _reduce_13(val, _values, result)
     result = val[0]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 24)
+module_eval(<<'.,.,', 'z_language_parser.y', 28)
   def _reduce_14(val, _values, result)
     result = val[0]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 25)
+module_eval(<<'.,.,', 'z_language_parser.y', 29)
   def _reduce_15(val, _values, result)
     result = val[0]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 29)
+module_eval(<<'.,.,', 'z_language_parser.y', 33)
   def _reduce_16(val, _values, result)
-      		@temp = Text.new val[2]
-  		result = @temp
-  	
-    result
-  end
-.,.,
-
-module_eval(<<'.,.,', 'z_language_parser.y', 34)
-  def _reduce_17(val, _values, result)
-                		@temp = Img.new val[2]
-  		result = @temp
+                  @temp = Text.new val[2]
+              result = @temp
             
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 39)
+module_eval(<<'.,.,', 'z_language_parser.y', 38)
+  def _reduce_17(val, _values, result)
+                    @temp = Img.new val[2]
+                result = @temp
+            
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'z_language_parser.y', 43)
   def _reduce_18(val, _values, result)
-                		@temp = Form.new val[2], val[4]
-  		result = @temp
-            	
+                    @temp = Form.new val[2], val[4]
+                result = @temp
+            
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 44)
+module_eval(<<'.,.,', 'z_language_parser.y', 48)
   def _reduce_19(val, _values, result)
-                		@temp = NewLine.new
-            		result = @temp
-            	
+                    @temp = NewLine.new
+                result = @temp
+            
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 49)
+module_eval(<<'.,.,', 'z_language_parser.y', 53)
   def _reduce_20(val, _values, result)
-                		@temp = @html.callFunc val[0], val[2]
-            		result = @temp
+                    @temp = @html.callFunc val[0], val[2]
+                result = @temp
             
     result
   end
@@ -441,74 +443,74 @@ module_eval(<<'.,.,', 'z_language_parser.y', 49)
 
 # reduce 23 omitted
 
-module_eval(<<'.,.,', 'z_language_parser.y', 57)
+module_eval(<<'.,.,', 'z_language_parser.y', 61)
   def _reduce_24(val, _values, result)
     @temp.time = val[2]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 60)
+module_eval(<<'.,.,', 'z_language_parser.y', 64)
   def _reduce_25(val, _values, result)
-                		@temp.time = val[2]
-            		@temp.time_attr = val[4]
-            	
+                    @temp.time = val[2]
+                @temp.time_attr = val[4]
+            
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 64)
+module_eval(<<'.,.,', 'z_language_parser.y', 68)
   def _reduce_26(val, _values, result)
     @temp.url = val[2]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 65)
+module_eval(<<'.,.,', 'z_language_parser.y', 69)
   def _reduce_27(val, _values, result)
     @temp.h = val[2]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 66)
+module_eval(<<'.,.,', 'z_language_parser.y', 70)
   def _reduce_28(val, _values, result)
     @temp.b = true
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 67)
+module_eval(<<'.,.,', 'z_language_parser.y', 71)
   def _reduce_29(val, _values, result)
     @temp.i = true
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 70)
+module_eval(<<'.,.,', 'z_language_parser.y', 74)
   def _reduce_30(val, _values, result)
-                   	@temp.w = val[2]
-               	@temp.h = val[4] 
-               
+                    @temp.w = val[2]
+                @temp.h = val[4] 
+            
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 73)
+module_eval(<<'.,.,', 'z_language_parser.y', 77)
   def _reduce_31(val, _values, result)
     @temp.addInput val[2], val[4], val[6]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 74)
+module_eval(<<'.,.,', 'z_language_parser.y', 78)
   def _reduce_32(val, _values, result)
     @temp.addSelect val[2], val[4]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 75)
+module_eval(<<'.,.,', 'z_language_parser.y', 79)
   def _reduce_33(val, _values, result)
     @temp.addSubmit val[2]
     result
@@ -517,49 +519,49 @@ module_eval(<<'.,.,', 'z_language_parser.y', 75)
 
 # reduce 34 omitted
 
-module_eval(<<'.,.,', 'z_language_parser.y', 78)
+module_eval(<<'.,.,', 'z_language_parser.y', 82)
   def _reduce_35(val, _values, result)
      result = [val[0]] + val[2] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 79)
+module_eval(<<'.,.,', 'z_language_parser.y', 83)
   def _reduce_36(val, _values, result)
      result = [val[0]] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 81)
+module_eval(<<'.,.,', 'z_language_parser.y', 85)
   def _reduce_37(val, _values, result)
      result = val[0] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 83)
+module_eval(<<'.,.,', 'z_language_parser.y', 87)
   def _reduce_38(val, _values, result)
      result = val[0] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 84)
+module_eval(<<'.,.,', 'z_language_parser.y', 88)
   def _reduce_39(val, _values, result)
      result = val[0] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 86)
+module_eval(<<'.,.,', 'z_language_parser.y', 90)
   def _reduce_40(val, _values, result)
      result = val[0].to_i 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'z_language_parser.y', 87)
+module_eval(<<'.,.,', 'z_language_parser.y', 91)
   def _reduce_41(val, _values, result)
      result = -(val[1].to_i) 
     result
@@ -585,9 +587,10 @@ if $0 == __FILE__
   #puts
   #puts 'Result:'
   # Do parse.
-  # begin
+  begin
     parser.parse(contents.to_s, File.basename(file_path, ".*"))
-  # rescue
-  #   puts $!
-  # end
+    puts 'Interprete success!'
+  rescue
+     puts $!
+  end
 end

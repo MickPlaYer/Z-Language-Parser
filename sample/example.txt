@@ -1,20 +1,24 @@
-a = [abc, sd, bc, jd, jir, 1234]
+arr = [a, b, c, de, fgh, 1234]
 
 img(a.png).url(http://luthertsai.com).size(100, 200)
 
 text(Hello world!)
-text(This is a link).url(http://www.zlanguage.com)
+text(This is a link).url(http://luthertsai.com)
 
-textass = 123
+var = 123
 
-text(#{textass}).url(link).bold().size(18)
+text(#{var}).url(http://luthertsai.com).bold().size(18)
 
 text(line: #{i}).times(100, i)
-img(#{i}.png).times(5,i)
+img(img#{i}.jpg).size(100, 200).times(5,i)
 newline().times(6)
 
 def big_img(path)
-	img(#{path}#{i}).size(1000, 1000).times(5,i)
+	img(img#{i}.#{path}).size(240, 135).times(5,i)
 end
 
-big_img(icon.png)
+form(post.html, post).select(opt,#{arr}).submit(GO)
+
+form(var.html, get).select(var,#{var}).submit(OK)
+
+big_img(jpg)
