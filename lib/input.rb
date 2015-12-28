@@ -8,7 +8,7 @@ class Input
 	end
 
 	def write var
-		temp = "<input name='#{@name}' type='#{@type}' value='#{@value}' />"
+		temp = "<input name='#{@name}' type='#{@type}' value='#{@value}' /><br>"
 		var.each do |k, v|
 			temp.gsub! "\#\{#{k}\}", v.to_s
 		end

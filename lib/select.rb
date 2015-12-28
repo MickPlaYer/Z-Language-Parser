@@ -26,7 +26,7 @@ class Select
 				temp.gsub! "\#\{#{k}\}", v.to_s
 			end
 		end
-		temp = temp + "\n" + "</select>"
+		temp = temp + "\n" + "</select><br>"
 		temp
 	end
 end

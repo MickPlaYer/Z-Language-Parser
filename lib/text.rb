@@ -17,7 +17,7 @@ class Text
 		@time = @time.to_i
 		@time.times do |i|
 			 if @h
-				temp2 = "<font size='#{@h}'>#{@text}</font>"
+				temp2 = "<font style=\"font-size:#{@h}px\">#{@text}</font>"
 			else
 				temp2 = "#{@text}"
 			end

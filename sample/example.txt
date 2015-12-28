@@ -1,24 +1,40 @@
-arr = [a, b, c, de, fgh, 1234]
+arr = [option01, option02, option03, option04, option05, option06]
 
-img(a.png).url(http://luthertsai.com).size(100, 200)
+img(a.png).url(http://luthertsai.com).size(50, 50)
+text(new kind of language for programming a website).size(20)
+newline()
+text(Z-Language is your good choice to programming!!).size(20)
+newline()
+text(This is a link reference to my website).url(http://luthertsai.com).bold()
+newline()
+newline()
+var = 1234567890
 
-text(Hello world!)
-text(This is a link).url(http://luthertsai.com)
+text(TEST#{var}).url(http://luthertsai.com).bold().size(72)
+newline()
+newline()
+text(The following will print 20 lines)
+newline()
 
-var = 123
+text(This is line: #{i} <br>).times(20, i)
 
-text(#{var}).url(http://luthertsai.com).bold().size(18)
-
-text(line: #{i}).times(100, i)
 img(img#{i}.jpg).size(100, 200).times(5,i)
-newline().times(6)
+newline().times(3)
 
-def big_img(path)
+def constructImage(path)
 	img(img#{i}.#{path}).size(240, 135).times(5,i)
 end
 
-form(post.html, post).select(opt,#{arr}).submit(GO)
+text(This is a form with POST).size(14)
+newline()
+form(post.php, post).input(textInput, text, testValue).select(selectionInput,#{arr}).submit(GO)
 
-form(var.html, get).select(var,#{var}).submit(OK)
+newline()
+newline()
 
-big_img(jpg)
+text(This is a form with GET).size(14)
+newline()
+form(var.php, get).select(var,#{var}).submit(OK)
+newline()
+
+constructImage(jpg)
