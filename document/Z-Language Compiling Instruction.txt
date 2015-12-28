@@ -1,0 +1,30 @@
+//Z-Language Compiling Instruction
+//Copyrights @ 2016 NTUT/CSIE - Compiler
+//Product Manager: Mick Zou
+//Executive Developer: Andy Chen, Luther Tsai
+
+//System Requirement
+I. 		ruby required; 	ref:https://www.ruby-lang.org/zh_tw/
+II. 	gem required;	ref:https://rubygems.org/
+III. 	racc required;
+
+How to install ruby?
+For Mac/Linux/Unix User:
+
+For Windows User:
+
+How to install racc?
+Open your terminal/cmd.
+Input following stmt "gem install racc"
+
+//Prepare for Compilation
+Before you compile, you need a txt with Z-Language.
+Here is our example if you needed.
+
+//Compiling Instruction
+
+//Generate HTML With Z-Language
+Open your terminal/cmd
+Change your directory to the location where you put your z_language_parser.rb
+Input following stmt "ruby z_language_parser.rb yourDirectory/example.txt"
+If compiling success, it will show "Interprete success!" and generate a example.html
