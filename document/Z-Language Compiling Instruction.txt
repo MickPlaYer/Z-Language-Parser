@@ -9,9 +9,7 @@ II. 	gem required;	ref:https://rubygems.org/
 III. 	racc required;
 
 How to install ruby?
-For Mac/Linux/Unix User:
-
-For Windows User:
+https://www.ruby-lang.org/zh_tw/documentation/installation/
 
 How to install racc?
 Open your terminal/cmd.
@@ -21,10 +19,59 @@ Input following stmt "gem install racc"
 Before you compile, you need a txt with Z-Language.
 Here is our example if you needed.
 
+---------------------------example.txt--------------------------------
+arr = [option01, option02, option03, option04, option05, option06]
+
+img(a.png).url(http://luthertsai.com).size(50, 50)
+text(new kind of language for programming a website).size(20)
+newline()
+text(Z-Language is your good choice to programming!!).size(20)
+newline()
+text(This is a link reference to my website).url(http://luthertsai.com).bold()
+newline()
+newline()
+
+var = 1234567890
+text(TEST#{var}).url(http://luthertsai.com).bold().size(72)
+newline()
+newline()
+
+text(The following will print 20 lines)
+newline()
+text(This is line: #{i} <br>).times(20, i)
+
+img(img#{i}.jpg).size(100, 200).times(5,i)
+newline().times(3)
+
+def constructImage(path)
+	img(img#{i}.#{path}).size(240, 135).times(5,i)
+end
+
+text(This is a form with POST).size(14)
+newline()
+form(post.php, post).input(textInput, text, testValue).select(selectionInput,#{arr}).submit(GO)
+newline()
+newline()
+
+text(This is a form with GET).size(14)
+newline()
+form(var.php, get).select(var,#{var}).submit(OK)
+newline()
+
+constructImage(jpg)
+-------------------------End of example.txt----------------------------
+
 //Compiling Instruction
+There is a complete version of z_language_parser.y
+Open your terminal/cmd
+Change your directory to the location where you put your z_language_parser.y
+Input following stmt "racc z_language_parser.y"
+It will generate a ruby executable file
+You can use it for interprete our Z-language to HTML
 
 //Generate HTML With Z-Language
 Open your terminal/cmd
 Change your directory to the location where you put your z_language_parser.rb
 Input following stmt "ruby z_language_parser.rb yourDirectory/example.txt"
 If compiling success, it will show "Interprete success!" and generate a example.html
+If error occurs, it will show the error on your terminal/cmd
