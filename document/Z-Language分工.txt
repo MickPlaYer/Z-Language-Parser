@@ -1,0 +1,19 @@
+//Z-Language分工
+//Copyrights @ 2016 NTUT/CSIE - Compiler
+//Product Manager: Mick Zou
+//Executive Developer: Andy Chen, Luther Tsai
+
+101820340 鄒令業 Mick Zou      - 35%
+* Product Management
+* Lexer Development
+* Parser
+
+101820331 陳亮宇 Andy Chen     - 35%
+* HTML Creator
+* HTML lib development 
+* Parser 
+
+101820308 蔡易儒 Luther Tsai   - 30%
+* Bug fixed in HTML lib
+* Presentation
+* Documentations
