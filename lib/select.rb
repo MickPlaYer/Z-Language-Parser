@@ -7,7 +7,7 @@ class Select
 	end
 
 	def write var
-		temp = "<select name='#{@name}'>"
+		temp = "#{@name}: <select name='#{@name}'>"
 		if @objs.kind_of?(Array)
 			@objs.each do |obj|
 				temp = temp + "\n" + "<option value='#{obj}'>#{obj}</option>"

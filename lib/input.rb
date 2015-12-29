@@ -8,7 +8,11 @@ class Input
 	end
 
 	def write var
-		temp = "<input name='#{@name}' type='#{@type}' value='#{@value}' /><br>"
+		if @type == "submit" 
+			temp = "<input name='#{@name}' type='#{@type}' value='#{@value}' /><br>"
+		else
+			temp = "#{@name}: <input name='#{@name}' type='#{@type}' value='#{@value}' /><br>"
+		end
 		var.each do |k, v|
 			temp.gsub! "\#\{#{k}\}", v.to_s
 		end
